@@ -73,6 +73,7 @@ button{border:0;border-radius:10px;padding:12px 15px;font-size:14px;font-weight:
 <label>③ 이수구분</label>
 <div class="menu">
 <button onclick="showCourses('지교')">지교</button>
+<button id="generalBtn" class="hidden" onclick="showCourses('반교')">반교</button>
 <button id="electricBtn" class="hidden" onclick="showCourses('전기')">전기</button>
 <button onclick="showCourses('전필')">전필</button>
 <button onclick="showCourses('전선')">전선</button>
@@ -127,11 +128,14 @@ deptEl.innerHTML = '<option value="">학과를 선택하세요</option>' +
 yearEl.innerHTML = '<option value="">학년도를 선택하세요</option>' +
   years.map(x=>`<option value="${x}">${x}학년도</option>`).join('');
 
+const generalBtn = document.getElementById('generalBtn');
 const electricBtn = document.getElementById('electricBtn');
 
 yearEl.addEventListener('change', () => {
   const year = Number(yearEl.value);
-  electricBtn.classList.toggle('hidden', !year || year < 2025);
+  const showNewCategories = !!year && year >= 2025;
+  generalBtn.classList.toggle('hidden', !showNewCategories);
+  electricBtn.classList.toggle('hidden', !showNewCategories);
 });
 
 function show(id){
