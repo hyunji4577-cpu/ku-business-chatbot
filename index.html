@@ -72,7 +72,7 @@ button{border:0;border-radius:10px;padding:12px 15px;font-size:14px;font-weight:
 
 <label>③ 이수구분</label>
 <div class="menu">
-<button onclick="showCourses('지교')">지교</button>
+<button id="basicBtn" onclick="showCourses('지교')">지교</button>
 <button id="generalBtn" class="hidden" onclick="showCourses('반교')">반교</button>
 <button id="electricBtn" class="hidden" onclick="showCourses('전기')">전기</button>
 <button onclick="showCourses('전필')">전필</button>
@@ -134,6 +134,7 @@ const electricBtn = document.getElementById('electricBtn');
 yearEl.addEventListener('change', () => {
   const year = Number(yearEl.value);
   const showNewCategories = !!year && year >= 2025;
+  basicBtn.classList.toggle('hidden', showNewCategories);
   generalBtn.classList.toggle('hidden', !showNewCategories);
   electricBtn.classList.toggle('hidden', !showNewCategories);
 });
